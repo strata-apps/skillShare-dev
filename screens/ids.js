@@ -1,4 +1,7 @@
 // screens/ids.js
+import buildIdEmail from "../functions/email_ID.js";
+import emailAPI from "../functions/email_API.js";
+
 
 function escapeHtml(s) {
   return String(s ?? "")
@@ -240,9 +243,11 @@ function renderDetail(root, item) {
           }
         </div>
 
-        <button class="idDeleteBtn" type="button">
-          🗑️ Delete
-        </button>
+        <div class="idDetailActions">
+          <button class="idShareBtn" type="button">📤 Share</button>
+          <button class="idDeleteBtn" type="button">🗑️ Delete</button>
+        </div>
+
       </div>
     </section>
   `;
@@ -251,6 +256,141 @@ function renderDetail(root, item) {
   root.querySelector(".idDeleteBtn")?.addEventListener("click", () => {
     alert("Delete is a placeholder in this version.");
   });
+
+    // Share action: sign in -> preview -> input recipient -> send
+  root.querySelector(".idShareBtn")?.addEventListener("click", async () => {
+    try {
+      // 1) Build email content
+      const { subject, html } = buildIdEmail(item, { brandName: "Digital Credential Wallet" });
+
+      // 2) Ensure Gmail auth (prompts if not yet granted)
+      await emailAPI.ensureSignedIn();
+
+      // 3) Preview + recipient modal
+      const to = await openShareModal({ subject, html });
+      if (!to) return; // user cancelled
+
+      // 4) Send
+      await emailAPI.sendHtml({ to, subject, html });
+      alert("✅ ID shared successfully!");
+    } catch (e) {
+      console.error(e);
+      alert("Failed to share ID.\n\n" + (e?.message || e));
+    }
+  });
+
+  function openShareModal({ subject, html }) {
+    return new Promise((resolve) => {
+      const overlay = document.createElement("div");
+      overlay.style.position = "fixed";
+      overlay.style.inset = "0";
+      overlay.style.background = "rgba(0,0,0,.35)";
+      overlay.style.zIndex = "9999";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) close(null);
+      });
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.width = "min(900px, 94vw)";
+      card.style.maxHeight = "86vh";
+      card.style.display = "flex";
+      card.style.flexDirection = "column";
+      card.style.gap = "10px";
+      card.style.padding = "14px";
+      card.style.overflow = "hidden";
+
+      const head = document.createElement("div");
+      head.style.display = "flex";
+      head.style.justifyContent = "space-between";
+      head.style.alignItems = "center";
+      head.style.gap = "10px";
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div class="kicker">Share ID</div>
+        <div class="big" style="margin-top:2px">Preview Email</div>
+        <div class="label" style="margin-top:4px">Subject: ${escapeHtml(subject)}</div>
+      `;
+
+      const x = document.createElement("button");
+      x.className = "btn";
+      x.textContent = "✕";
+      x.onclick = () => close(null);
+
+      head.append(left, x);
+
+      const toRow = document.createElement("div");
+      toRow.style.display = "flex";
+      toRow.style.gap = "8px";
+      toRow.style.alignItems = "center";
+      toRow.style.flexWrap = "wrap";
+
+      const toInput = document.createElement("input");
+      toInput.className = "input";
+      toInput.type = "email";
+      toInput.placeholder = "Recipient email address";
+      toInput.style.flex = "1";
+      toInput.style.minWidth = "260px";
+
+      const sendBtn = document.createElement("button");
+      sendBtn.className = "btn-primary";
+      sendBtn.textContent = "Send";
+
+      const cancelBtn = document.createElement("button");
+      cancelBtn.className = "btn";
+      cancelBtn.textContent = "Cancel";
+
+      toRow.append(toInput, cancelBtn, sendBtn);
+
+      const preview = document.createElement("div");
+      preview.style.flex = "1";
+      preview.style.overflow = "auto";
+      preview.style.border = "1px solid #e5e7eb";
+      preview.style.borderRadius = "12px";
+      preview.style.background = "#fff";
+      preview.style.padding = "10px";
+
+      // Use an iframe so the email HTML renders safely without affecting your page CSS
+      const iframe = document.createElement("iframe");
+      iframe.style.width = "100%";
+      iframe.style.height = "460px";
+      iframe.style.border = "0";
+      preview.appendChild(iframe);
+
+      overlay.appendChild(card);
+      card.append(head, toRow, preview);
+      document.body.appendChild(overlay);
+
+      // Write HTML into iframe
+      const doc = iframe.contentWindow?.document;
+      if (doc) {
+        doc.open();
+        doc.write(html);
+        doc.close();
+      }
+
+      cancelBtn.onclick = () => close(null);
+
+      sendBtn.onclick = () => {
+        const to = (toInput.value || "").trim();
+        if (!to) {
+          alert("Please enter a recipient email.");
+          return;
+        }
+        close(to);
+      };
+
+      function close(val) {
+        overlay.remove();
+        resolve(val);
+      }
+    });
+  }
+
 }
 
 export async function renderIDs(root) {

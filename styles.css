@@ -1216,3 +1216,66 @@ hr.sep{
   background: color-mix(in srgb, var(--accent) 92%, #ff0015 8%);
 }
 
+/* --- ID Detail Actions (Share / Delete) --- */
+.idDetailActions{
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Share button */
+.idShareBtn{
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(59,130,246,.45);   /* blue accent */
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 950;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.idShareBtn:hover{
+  background: #dbeafe;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(2,6,23,.12);
+}
+
+.idShareBtn:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(2,6,23,.12);
+}
+
+/* Delete button (slightly subdued but still clear) */
+.idDetailActions .idDeleteBtn{
+  flex: 1;
+  margin-top: 0; /* override existing margin */
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(245,158,11,.45);
+  background: #fff7ed;
+  color: #92400e;
+  font-weight: 950;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.idDetailActions .idDeleteBtn:hover{
+  background: #ffedd5;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(2,6,23,.12);
+}
+
+.idDetailActions .idDeleteBtn:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(2,6,23,.12);
+}
+
+/* Mobile: stack actions vertically if space is tight */
+@media (max-width: 420px){
+  .idDetailActions{
+    flex-direction: column;
+  }
+}
+
