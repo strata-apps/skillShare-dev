@@ -401,3 +401,818 @@ hr.sep{
   font-weight: 700;
   font-size: 13px;
 }
+
+/* Additional Styling for new Dashboard */
+/* --- Wallet Home (new dashboard) --- */
+:root{
+  --tile-yellow: #f6d365;
+  --tile-mint: #58d6c4;
+  --tile-coral: #ff7b6e;
+  --tile-lav: #8ea1ff;
+}
+
+.walletHome{
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 18px 14px 88px;
+}
+
+.walletHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+
+.walletBrandName{
+  font-weight: 950;
+  letter-spacing: 2px;
+  color: #ff3b30;
+  font-size: 14px;
+}
+
+.walletHeaderRight{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.walletAvatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.walletIconBtn{
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.walletTitle{
+  font-size: 28px;
+  font-weight: 950;
+  margin: 12px 0 14px;
+  color: #0f172a;
+}
+
+.walletGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.walletTile{
+  position: relative;
+  border-radius: 22px;
+  padding: 14px;
+  min-height: 160px;
+  display:block;
+  text-decoration:none;
+  color:#0f172a;
+  box-shadow: 0 14px 30px rgba(2,6,23,.10);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.walletTile:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(2,6,23,.14);
+}
+
+.walletTileTitle{
+  font-weight: 950;
+  font-size: 14px;
+  opacity: .9;
+}
+
+.walletTileIcon{
+  font-size: 64px;
+  line-height: 1;
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+}
+
+.walletTileBadge{
+  position:absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #0b1b3a;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 950;
+  border: 3px solid rgba(255,255,255,.85);
+}
+
+.walletBottomBar{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 14px;
+  width: min(520px, calc(100% - 24px));
+  background: #0b1b3a;
+  border-radius: 18px;
+  padding: 10px 12px;
+  display:flex;
+  justify-content:space-between;
+  box-shadow: 0 18px 42px rgba(2,6,23,.22);
+}
+
+.walletTab{
+  flex: 1;
+  text-align:center;
+  text-decoration:none;
+  color: rgba(255,255,255,.70);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.walletTab.active{
+  color:#fff;
+}
+
+/* color each tile via inline style (set by JS) */
+.walletTile[href="#/ids"]{ background: var(--tile-yellow); }
+.walletTile[href="#/learning-history"]{ background: var(--tile-mint); }
+.walletTile[href="#/employment-credentials"]{ background: var(--tile-coral); }
+.walletTile[href="#/achievements"]{ background: var(--tile-lav); }
+
+
+/* --- IDs Screen (list + detail) --- */
+.idsPage{
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 14px 24px;
+}
+
+.idsTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.idsBackLink{
+  display:inline-block;
+  text-decoration:none;
+  color:#64748b;
+  font-weight:900;
+  margin-bottom: 10px;
+}
+
+.idsTitleRow{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.idsIcon{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 2px solid rgba(15,23,42,.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.idsTitle{
+  font-size: 24px;
+  font-weight: 950;
+  color:#0f172a;
+}
+
+.idsTopRight{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+.idsRoundBtn{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.12);
+  background:#fff;
+  font-weight: 950;
+  cursor:pointer;
+}
+
+.idsList{
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.idCardRow{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  border-radius: 22px;
+  background: #fde68a; /* warm yellow like screenshot */
+  padding: 12px;
+  box-shadow: 0 14px 30px rgba(2,6,23,.10);
+  cursor:pointer;
+}
+
+.idCardThumb{
+  width: 88px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.65);
+  border-left: 8px solid #2563eb;
+  position: relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.idCardThumbEmoji{
+  font-size: 30px;
+  position:absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.idCardThumbLines{
+  position:absolute;
+  right: 10px;
+  top: 14px;
+  width: 30px;
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+}
+
+.idCardThumbLine{
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(15,23,42,.14);
+}
+.idCardThumbLine.short{ width: 60%; }
+
+.idCardMeta{
+  flex:1;
+  min-width:0;
+}
+
+.idCardBadge{
+  display:inline-block;
+  font-size: 11px;
+  font-weight: 950;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15,23,42,.12);
+  color:#0f172a;
+  margin-bottom: 6px;
+}
+.idCardBadge.active{
+  background: #10b981;
+  color: #052e10;
+}
+
+.idCardName{
+  font-weight: 950;
+  color:#0f172a;
+  font-size: 14px;
+}
+
+.idCardSub{
+  color:#334155;
+  font-weight: 700;
+  font-size: 12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.idCardActions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.idOpenBtn{
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.16);
+  background:#fff;
+  font-weight: 950;
+  cursor:pointer;
+}
+
+.idKebabBtn{
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.12);
+  background:#fff;
+  font-weight: 950;
+  cursor:pointer;
+}
+
+/* --- Detail view --- */
+.idDetailPage{
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 18px 14px 26px;
+}
+
+.idDetailTop{
+  display:flex;
+  align-items:flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.idDetailBack{
+  text-decoration:none;
+  font-weight: 950;
+  color:#0f172a;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,.10);
+}
+
+.idDetailTitle{
+  font-weight: 950;
+  color:#0f172a;
+}
+
+.idDetailSub{
+  color:#64748b;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.idDetailStatus{
+  display:inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 950;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15,23,42,.10);
+  color:#0f172a;
+}
+.idDetailStatus.active{
+  background: #10b981;
+  color:#052e10;
+}
+
+.idPreviewCard{
+  border-radius: 20px;
+  border-top: 10px solid #2563eb;
+  background: #ffffff;
+  box-shadow: 0 16px 36px rgba(2,6,23,.12);
+  padding: 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+  margin: 10px 0 14px;
+}
+
+.idPreviewAvatar{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.idPreviewName{
+  font-weight: 950;
+  color:#0f172a;
+  font-size: 12px;
+}
+
+.idPreviewOrg{
+  font-weight: 950;
+  color:#0f172a;
+  font-size: 12px;
+  text-align:right;
+}
+
+.idPreviewEmoji{
+  font-size: 34px;
+  text-align:right;
+  margin-top: 8px;
+}
+
+.idDetailSheet{
+  border-radius: 20px;
+  background: #fef3c7; /* pale yellow sheet */
+  padding: 14px;
+  border: 1px solid rgba(15,23,42,.06);
+}
+
+.idDetailSectionTitle{
+  font-weight: 950;
+  margin-bottom: 10px;
+  color:#0f172a;
+}
+
+.idDetailGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+
+.idDetailKey{
+  font-size: 11px;
+  font-weight: 950;
+  color:#0f172a;
+  text-transform: uppercase;
+  opacity: .75;
+}
+
+.idDetailVal{
+  font-size: 12px;
+  font-weight: 850;
+  color:#0f172a;
+  text-align:right;
+}
+
+.idDetailDivider{
+  grid-column: 1 / -1;
+  height: 1px;
+  background: rgba(15,23,42,.10);
+  margin: 10px 0 6px;
+}
+
+.idDeleteBtn{
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(245,158,11,.45);
+  background: #fff7ed;
+  font-weight: 950;
+  cursor:pointer;
+}
+
+/* --- Wave-shaped ID cards (list view) --- */
+.idWaveCard{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fde68a; /* keep your warm base */
+  box-shadow: 0 16px 34px rgba(2,6,23,.14);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+  min-height: 130px;
+}
+
+.idWaveCard:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 44px rgba(2,6,23,.18);
+}
+
+.idWaveSvg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130%;
+  height: 72px;         /* wave height */
+  z-index: 0;
+  opacity: 0.95;
+}
+
+.idWaveBody{
+  position: relative;
+  z-index: 1;
+  padding: 12px 12px 14px;
+}
+
+.idWaveTopRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.idWaveBadge{
+  display:inline-block;
+  font-size: 11px;
+  font-weight: 950;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.65);
+  color:#0f172a;
+  border: 1px solid rgba(15,23,42,.08);
+  backdrop-filter: blur(6px);
+}
+
+.idWaveBadge.active{
+  background: rgba(16,185,129,.92);
+  color: #052e10;
+  border-color: rgba(5,46,16,.15);
+}
+
+.idWaveActions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+/* Reuse your existing buttons; these just look better on wave cards */
+.idWaveCard .idOpenBtn{
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.14);
+  background: rgba(255,255,255,.92);
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.idWaveCard .idKebabBtn{
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: rgba(255,255,255,.92);
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.idWaveMain{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.idWaveIcon{
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 34px;
+  border: 1px solid rgba(15,23,42,.06);
+}
+
+.idWaveText{
+  flex: 1;
+  min-width: 0;
+}
+
+.idWaveName{
+  font-weight: 950;
+  color:#0f172a;
+  font-size: 14px;
+}
+
+.idWaveSub{
+  margin-top: 3px;
+  color:#334155;
+  font-weight: 800;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Employment Credentials: Flip Card Styling --- */
+.credFlipCard{
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 22px;
+  perspective: 1400px;
+}
+
+.credFlipInner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  transform-style: preserve-3d;
+  transition: transform 0.9s ease;
+}
+
+.credFlipCard:hover .credFlipInner{
+  transform: rotateY(180deg);
+}
+
+.credFace{
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 16px 34px rgba(2,6,23,.14);
+  background: #0E1C2C;
+  color: #fff;
+}
+
+/* FRONT */
+.credFront{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.credFrontTop{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 16px 16px 10px;
+}
+
+.credLogo{
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 950;
+  color: #0E1C2C;
+  background: #fff;
+  border: 2px solid rgba(255,255,255,.7);
+}
+
+.credBrandName{
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  font-size: 11px;
+  opacity: .9;
+}
+
+.credTagline{
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.credTitle{
+  padding: 0 16px;
+  font-weight: 950;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.credStrip{
+  position: relative;
+  height: 20px;
+  margin-top: 8px;
+  background: #374C5D;
+}
+
+.credStrip::before{
+  content:"";
+  display:block;
+  height: 20px;
+  width: 62%;
+  margin: -20px auto 0;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: color-mix(in srgb, var(--accent) 92%, #ff0015 8%);
+}
+
+.credFrontBottom{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 0;
+  height: 74px;
+  background: #fff;
+  color: #0E1C2C;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.credFrontBottom p{
+  padding: 0 18px;
+  margin-top: 12px;
+}
+
+.credFrontBottom p:nth-child(1),
+.credFrontBottom p:nth-child(2){
+  border-right: 2px solid rgba(14, 28, 44, 0.25);
+}
+
+/* BACK */
+.credBack{
+  transform: rotateY(180deg);
+  display:flex;
+  justify-content:space-between;
+  align-items:stretch;
+}
+
+.credBackLeft{
+  flex: 1;
+  padding: 18px 16px;
+}
+
+.credBackTitle{
+  font-size: 18px;
+  font-weight: 950;
+  letter-spacing: .5px;
+}
+
+.credBackSub{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  font-weight: 800;
+}
+
+.credHr{
+  margin-top: 10px;
+  height: 2px;
+  width: 74px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.credBackMeta{
+  margin-top: 12px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.credMini{
+  margin-top: 8px;
+  opacity: .85;
+  font-weight: 700;
+}
+
+.credBackRight{
+  width: 44%;
+  background: #fff;
+  color: #0E1C2C;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 22px;
+  padding: 18px 16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap: 12px;
+}
+
+.credBtn{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(14,28,44,.14);
+  background: var(--accent);
+  color: #0E1C2C;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.credBtn.ghost{
+  background: transparent;
+  color: #0E1C2C;
+  border: 2px solid rgba(14,28,44,.18);
+}
+
+.credBackRail{
+  position:absolute;
+  right: calc(44% - 18px);
+  top: 0;
+  width: 38px;
+  height: 100%;
+  background: #374C5D;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.credBackRail::before{
+  content:"";
+  display:block;
+  transform: translateX(-30px);
+  width: 22px;
+  height: 72%;
+  margin-top: 16%;
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+  background: color-mix(in srgb, var(--accent) 92%, #ff0015 8%);
+}
+
